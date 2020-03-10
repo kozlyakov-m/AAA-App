@@ -1,4 +1,4 @@
-class Handler {
+class ArgHandler {
     val arguments: Array<String>
 
     init {

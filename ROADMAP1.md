@@ -34,6 +34,8 @@
  T1.1 | app.jar | 1 + справка
  T1.2 | app.jar -h | 1 + справка
  T1.3 | app.jar -q | 0 + справка
+ Т1.4 | app.jar 12345 | 0 + справка
+ T1.5 | app.jar -res A.B 12345 | 0 + справка
  T2.1 | app.jar -login vasya -pass 123 | 0
  T2.2 | app.jar -login VASYA -pass 123 | 2
  T2.3 | app.jar -login asd -pass 123 | 3
