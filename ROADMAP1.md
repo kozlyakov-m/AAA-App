@@ -49,6 +49,11 @@
  T3.5 | app.jar -login vasya -pass 0000 -res A.B -role DELETE | 4
  T3.6 | app.jar -login admin -pass admin -res A -role EXECUTE | 6
  T3.7 | app.jar -login admin -pass admin -res A.A -role WRITE | 6
+ T4.1 | app.jar -login vasya -pass 123 -res A -role READ -ds 2020-03-10 -de 2020-03-11 -vol 100 | 0
+ T4.2 | app.jar -login vasya -pass 123 -res A -role READ -ds 2020.03.10 -de 2020.03.11 -vol 100 | 7
+ T4.3 | app.jar -login vasya -pass 123 -res A -role READ -ds 2020-03-10 -de 2020-03-11 -vol aaaa | 7
+ T4.4 | app.jar -login vasya -pass 123 -res A -role EXECUTE -ds 01.02.3012 -de 01.02.2030 -vol aaa | 6
+ T4.5 | app.jar -login vasya -pass 123 -res A -role READ -ds 2020-03-11 -de 2020-03-10 -vol 100 | 7
  
  2. Создать скрипт компиляции
  3. Создать скрипты запуска
