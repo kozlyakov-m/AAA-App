@@ -30,6 +30,7 @@
  
 #### 2. Создать скрипты
  1. Записать тесты в bat/sh файл
+ 
  № | Входные данные | Ожидаемый результат
   --- | --- | ---
  T1.1 | app.jar | 1 + справка
@@ -48,6 +49,7 @@
  T3.5 | app.jar -login vasya -pass 0000 -res A.B -role DELETE | 4
  T3.6 | app.jar -login admin -pass admin -res A -role EXECUTE | 6
  T3.7 | app.jar -login admin -pass admin -res A.A -role WRITE | 6
+ 
  2. Создать скрипт компиляции
  3. Создать скрипты запуска
  
