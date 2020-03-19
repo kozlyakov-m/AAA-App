@@ -1,3 +1,4 @@
 #!/bin/bash
 
-kotlinc ./src -include-runtime -d app.jar
+mkdir bin
+kotlinc ./src -include-runtime -d bin/app.jar
