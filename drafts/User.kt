@@ -21,6 +21,7 @@ class User {
         * Method which checks account length and characters ad them
         * register in account string*/
         re.compile(r'[a-z]{1-10}')
+
     }
 
     fun checkPassword(password: String) {
