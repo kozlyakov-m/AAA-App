@@ -1,4 +1,4 @@
 #!/bin/bash
 
-mkdir bin
+mkdir -p bin
 kotlinc ./src -include-runtime -d bin/app.jar
