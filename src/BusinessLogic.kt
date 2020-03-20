@@ -10,5 +10,8 @@ class BusinessLogic {
         )
     }
 
-
+    fun isLoginValid(login: String): Boolean {
+        val regex = "^[a-z]{1,10}$".toRegex()
+        return regex.matches(login)
+    }
 }
