@@ -1,4 +1,4 @@
-class BuisnessLogic {
+class BusinessLogic {
 
     fun printHelp() {
         println(

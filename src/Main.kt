@@ -1,13 +1,13 @@
 import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
-    val buisnessLogic = BuisnessLogic()
+    val businessLogic = BusinessLogic()
     if (args.isEmpty()) {
-        buisnessLogic.printHelp()
+        businessLogic.printHelp()
         exitProcess(1)
     } else {
         if (args[0] == "-h"){
-            buisnessLogic.printHelp()
+            businessLogic.printHelp()
             exitProcess(1)
         }
     }
