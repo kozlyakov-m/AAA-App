@@ -1,5 +1,7 @@
 import kotlin.system.exitProcess
 
+
+
 fun main(args: Array<String>) {
     val businessLogic = BusinessLogic()
     if (args.isEmpty()) {
@@ -10,6 +12,9 @@ fun main(args: Array<String>) {
             businessLogic.printHelp()
             exitProcess(1)
         }
+    }
+    if(isAuthenticationNeeded(args)){
+        businessLogic.authentication(args[1], args[3])
     }
     exitProcess(0)
 }

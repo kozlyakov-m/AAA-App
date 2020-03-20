@@ -4,14 +4,14 @@ function test() {
     test_name=$1
     params=$2
     expected_status=$3
-    ./run.sh $params
+    output=$(./run.sh $params)
     actual_status=$?
 
     if [ $actual_status -eq $expected_status ]
     then
-    echo -e "$test_name passed \n"
+    echo -e "$test_name passed \napp.jar $params \n"
     else
-    echo -e "$test_name failed \nexpected: $expected_status \nactual: $actual_status \n"
+    echo -e "$test_name failed \napp.jar $params \nexpected: $expected_status \nactual: $actual_status \n"
     fi
 }
 

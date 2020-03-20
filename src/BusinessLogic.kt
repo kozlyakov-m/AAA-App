@@ -1,3 +1,5 @@
+import kotlin.system.exitProcess
+
 class BusinessLogic {
 
     fun printHelp() {
@@ -21,5 +23,17 @@ class BusinessLogic {
 
     fun checkPassword(pass: String): Boolean {
         return pass == "123"
+    }
+
+    fun authentication(login: String, pass: String) {
+        if (!isLoginValid(login)) {
+            exitProcess(2)
+        }
+        if (!loginExist(login)) {
+            exitProcess(3)
+        }
+        if (!checkPassword(pass)){
+            exitProcess(4)
+        }
     }
 }

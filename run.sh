@@ -1,3 +1,3 @@
 #!/bin/bash
 
-java -jar bin/app.jar
+java -jar bin/app.jar $@
