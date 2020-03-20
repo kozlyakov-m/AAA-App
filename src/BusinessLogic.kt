@@ -14,4 +14,8 @@ class BusinessLogic {
         val regex = "^[a-z]{1,10}$".toRegex()
         return regex.matches(login)
     }
+
+    fun loginExist(login: String): Boolean {
+        return login == "vasya"
+    }
 }

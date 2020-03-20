@@ -15,5 +15,5 @@ fun main(args: Array<String>) {
 }
 
 fun isAuthenticationNeeded(args: Array<String>): Boolean {
-    return args[0]=="-login" && args[2]=="-pass"
+    return args[0] == "-login" && args[2] == "-pass"
 }
