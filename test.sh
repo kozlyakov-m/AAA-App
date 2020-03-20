@@ -9,10 +9,12 @@ function test() {
 
     if [ $actual_status -eq $expected_status ]
     then
-    echo -e "$test_name passed \napp.jar $params \n"
+    echo -e "\033[32m$test_name passed \033[0m"
     else
-    echo -e "$test_name failed \napp.jar $params \nexpected: $expected_status \nactual: $actual_status \n"
+    echo -e "\033[31m$test_name failed \033[0m"
     fi
+
+    echo -e "app.jar $params \nexpected: $expected_status \nactual: $actual_status \n"
 }
 
 test "T1.1" "" 1

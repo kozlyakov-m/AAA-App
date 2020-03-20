@@ -17,23 +17,27 @@ class BusinessLogic {
         return regex.matches(login)
     }
 
-    fun loginExist(login: String): Boolean {
-        return login == "vasya"
+    fun findUser(login: String, users: List<User>): User? {
+        for (user in users) {
+            if (user.login == login) {
+                return user
+            }
+        }
+        return null
     }
 
-    fun checkPassword(pass: String): Boolean {
-        return pass == "123"
+    fun checkPassword(pass: String, user: User): Boolean {
+        return pass == user.pass
     }
 
     fun authentication(login: String, pass: String) {
         if (!isLoginValid(login)) {
             exitProcess(2)
         }
-        if (!loginExist(login)) {
-            exitProcess(3)
-        }
-        if (!checkPassword(pass)){
-            exitProcess(4)
+        val user = findUser(login, users) ?: exitProcess(3)
+
+        if (!checkPassword(pass, user)) {
+            exitProcess(4)  
         }
     }
 }
