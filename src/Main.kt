@@ -1,6 +1,11 @@
 import kotlin.system.exitProcess
 
-
+val users: List<User> = listOf(
+        User("vasya", "123"),
+        User("admin", "admin"),
+        User("q", "?!#"),
+        User("abcdefghij", "pass")
+)
 
 fun main(args: Array<String>) {
     val businessLogic = BusinessLogic()
@@ -13,7 +18,7 @@ fun main(args: Array<String>) {
             exitProcess(1)
         }
     }
-    if(isAuthenticationNeeded(args)){
+    if (isAuthenticationNeeded(args)) {
         businessLogic.authentication(args[1], args[3])
     }
     exitProcess(0)
