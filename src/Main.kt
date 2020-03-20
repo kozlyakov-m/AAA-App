@@ -9,21 +9,10 @@ val users: List<User> = listOf(
 
 fun main(args: Array<String>) {
     val businessLogic = BusinessLogic()
-    if (args.isEmpty()) {
-        businessLogic.printHelp()
-        exitProcess(1)
-    } else {
-        if (args[0] == "-h") {
-            businessLogic.printHelp()
-            exitProcess(1)
-        }
-    }
-    if (isAuthenticationNeeded(args)) {
-        businessLogic.authentication(args[1], args[3])
+    val argHandler = ArgHandler(args, businessLogic)
+    argHandler.isHelpNeeded()
+    if (argHandler.isAuthenticationNeeded()) {
+        businessLogic.authentication(argHandler.login, argHandler.pass)
     }
     exitProcess(0)
-}
-
-fun isAuthenticationNeeded(args: Array<String>): Boolean {
-    return args[0] == "-login" && args[2] == "-pass"
 }
