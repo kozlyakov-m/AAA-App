@@ -12,12 +12,12 @@ class BusinessLogic {
         )
     }
 
-    fun isLoginValid(login: String): Boolean {
+    private fun isLoginValid(login: String): Boolean {
         val regex = "^[a-z]{1,10}$".toRegex()
         return regex.matches(login)
     }
 
-    fun findUser(login: String, users: List<User>): User? {
+    private fun findUser(login: String, users: List<User>): User? {
         for (user in users) {
             if (user.login == login) {
                 return user
@@ -26,7 +26,7 @@ class BusinessLogic {
         return null
     }
 
-    fun checkPassword(pass: String, user: User): Boolean {
+    private fun checkPassword(pass: String, user: User): Boolean {
         return pass == user.pass
     }
 
@@ -37,7 +37,7 @@ class BusinessLogic {
         val user = findUser(login, users) ?: exitProcess(3)
 
         if (!checkPassword(pass, user)) {
-            exitProcess(4)  
+            exitProcess(4)
         }
     }
 }
