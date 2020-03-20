@@ -18,4 +18,8 @@ class BusinessLogic {
     fun loginExist(login: String): Boolean {
         return login == "vasya"
     }
+
+    fun checkPassword(pass: String): Boolean {
+        return pass == "123"
+    }
 }
