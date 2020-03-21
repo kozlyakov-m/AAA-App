@@ -8,6 +8,17 @@ val users: List<User> = listOf(
         User("abcdefghij", "pass")
 )
 
+val permissions: List<Permission> = listOf(
+	Permission("A", "READ", "vasya")
+    Permission("A.B.C", "WRITE", "vasya")
+    Permission("A.B", "EXECUTE", "admin")
+    Permission("A", "READ", "admin")
+    Permission("A.B", "WRITE", "admin")
+    Permission("A.B.C", "READ", "admin")
+    Permission("B", "EXECUTE", "q")
+)
+
+
 fun main(args: Array<String>) {
     val argHandler = ArgHandler(args)
     val businessLogic = BusinessLogic(argHandler)
