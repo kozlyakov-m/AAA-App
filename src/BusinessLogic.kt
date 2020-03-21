@@ -52,26 +52,16 @@ class BusinessLogic(val args: ArgHandler) {
     
 	fun authorization(resPath: String, role: String, username: String):Permission? {
 		
-		
-		//делим по точке желаемый ресурс
-		//делим по точке ресурс из коллекции    
-		
-		//сравниваем полученные массивы
-		//пример
-		//хотим:
-		//A.B.C (массив: [A, B, C])
-		//есть в базе:
-		//A.B (массив: [A, B]) (доступ разрешен)
-		//A.C (массив: [A, C]) (доступ запрещен)
-		//A.B.C.D (массив: [A, B, C, D] (доступ запрещен)
-		
-        if(!isRoleExists(role)) exitProcess(5)//TODO
+				
+        if(!isRoleExists(role)) exitProcess(5) //возвращаем код 5, если роль не существует
+                                               //TODO
+                                               //возможно, перенести в Main                                              
         
 		for(permission in permissions) {
         
             if(username == permission.username && role == permission.role){
                 
-                if(resPath == permission.resPath) {
+                if(isChild(resPath, permission.resPath)) {
                     return permission
                 }
             }
@@ -79,6 +69,25 @@ class BusinessLogic(val args: ArgHandler) {
 		}
         return null
 	}
+    
+    private fun isChild(pathFromQuery: String, pathFromDB: String): Boolean {
+        
+        //делим по точке желаемый ресурс и ресурс из коллекции
+        val query: Array<String> = pathFromQuery.split(".").toTypedArray()
+        val resFromDB: Array<String> = pathFromDB.split(".").toTypedArray()
+
+        if(query.size < resFromDB.size) { //если запрос короче чем ресурс из бд, то это не потомок
+            return false
+        }
+        else { //иначе проверяем совпадение узлов по порядку (от 0 до длины ресурса из бд)
+
+            for(i in 0 until resFromDB.size) {
+                if(resFromDB[i] != query[i]) return false
+            }
+            return true
+        }
+        
+    }
     
     
 	
