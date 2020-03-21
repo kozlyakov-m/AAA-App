@@ -8,11 +8,10 @@ class ArgHandler(val args: Array<String>) {
     var role: String = ""
     var ds: String = ""
     var de: String = ""
+    var vol: Int = 0
 
     init {
-        /*if (isHelpRequired()) {
-            exitProcess(1) //надо возвращать в Main
-        }*/
+
         if (args.size >= 4) {
             login = args[1]
             pass = args[3]
@@ -21,9 +20,10 @@ class ArgHandler(val args: Array<String>) {
             res = args[5]
             role = args[7]
         }
-        if (args.size >= 12) {
+        if (args.size >= 14) {
             ds = args[9]
             de = args[11]
+            vol = args[13].toInt()
         }
     }
 	
