@@ -1,6 +1,6 @@
 import kotlin.system.exitProcess
 
-class BusinessLogic(val args: ArgHandler) {
+class BusinessLogic() {
 
 
 
@@ -89,6 +89,8 @@ class BusinessLogic(val args: ArgHandler) {
         
     }
     
+    fun accounting(res: Permission, ds: String, de: String, vol: String): Int{
     
-	
+    }   
+    
 }

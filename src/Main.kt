@@ -38,8 +38,7 @@ fun main(args: Array<String>) {
 	val user: User = (
 		if(argHandler.isAuthenticationRequired()) {
 			businessLogic.authentication(argHandler.login, argHandler.pass)
-		}
-		else {
+		} else {
 			exitProcess(1)
 		}
 	)
@@ -51,13 +50,18 @@ fun main(args: Array<String>) {
 	val permission: Permission = (
         if(argHandler.isAuthorizationRequired()) {
             businessLogic.authorization(argHandler.res, argHandler.role, user.login) ?: exitProcess(6)
-        }
-        else {
+        } else {
             exitProcess(0) //0 так как аутентификация прошла успешно
         }
     )
-	
-	exitProcess(0)	
+    
+    val session: Session = (
+        if(argHandler.isAccountingRequired()) {
+            businessLogic.accounting(permission, argHandler.ds, argHandler.de, argHandler.vol) ?: exitProcess(7)
+        } else {
+            exitProcess(0)
+        }
+    )
 }
 	
 	
