@@ -1,14 +1,27 @@
+import kotlinx.cli.*
+
 class ArgHandler(val args: Array<String>) {
-    var h: Boolean = false
-    var login: String = ""
-    var pass: String = ""
-    var res: String = ""
-    var role: String = ""
-    var ds: String = ""
-    var de: String = ""
-    var vol: String = "" //will convert to int in BusinessLogic
+
+    val parser = ArgParser("app.jar")
+    
+    //var h: Boolean = false
+    val login by parser.option(ArgType.String, shortName = "login").required()
+    val pass by parser.option(ArgType.String, shortName = "pass").default("")
+    val res by parser.option(ArgType.String, shortName = "res").default("")
+    val role by parser.option(ArgType.String, shortName = "role").default("")
+    val ds by parser.option(ArgType.String, shortName = "ds").default("")
+    val de by parser.option(ArgType.String, shortName = "de").default("")
+    val vol by parser.option(ArgType.String, shortName = "vol").default("") //will convert to int in BusinessLogic
 
     init {
+        try {
+        parser.parse(args)
+        } catch (e: Exception) {
+        
+        }
+    }
+    
+    /* init {
 
         if (args.size >= 4) {
             login = args[1]
@@ -25,7 +38,7 @@ class ArgHandler(val args: Array<String>) {
 
 
         }
-    }
+    }*/
 
     fun isHelpRequired(): Boolean {
         if (args.isEmpty()) {

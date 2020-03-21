@@ -18,7 +18,7 @@ function test() {
 }
 
 test "T1.1" "" 1
-test "T1.2" "-h" 1
+test "T1.2" "-h" 0 #было один 1 до подключения kotlinx.cli
 test "T1.3" "-q"  0
 test "Т1.4" "12345"  0
 test "T1.5" "-res A.B 12345"  0
