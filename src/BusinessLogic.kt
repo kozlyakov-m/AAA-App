@@ -89,8 +89,13 @@ class BusinessLogic() {
         
     }
     
-    fun accounting(res: Permission, ds: String, de: String, vol: String): Int{
+    fun accounting(res: Permission, ds: String, de: String, vol: String): Session{
+        
+    }
     
-    }   
+    private isDateCorrect(date: String): Boolean {
+        val pattern = "^\d{4}-\d{2}-\d{2}$".toRegex()
+        return date.matches(pattern)        
+    }
     
 }
