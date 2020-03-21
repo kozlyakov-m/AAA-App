@@ -45,4 +45,11 @@ class BusinessLogic(val args: ArgHandler) {
 		
 		return user
     }
+	
+	private fun isResValid(arg: String): Boolean {
+		//TODO
+	}
+	
+	
+	
 }

@@ -9,13 +9,19 @@ val users: List<User> = listOf(
 )
 
 val permissions: List<Permission> = listOf(
-	Permission("A", "READ", "vasya")
-    Permission("A.B.C", "WRITE", "vasya")
-    Permission("A.B", "EXECUTE", "admin")
-    Permission("A", "READ", "admin")
-    Permission("A.B", "WRITE", "admin")
-    Permission("A.B.C", "READ", "admin")
+	Permission("A", "READ", "vasya"),
+    Permission("A.B.C", "WRITE", "vasya"),
+    Permission("A.B", "EXECUTE", "admin"),
+    Permission("A", "READ", "admin"),
+    Permission("A.B", "WRITE", "admin"),
+    Permission("A.B.C", "READ", "admin"),
     Permission("B", "EXECUTE", "q")
+)
+
+val roles: Set<String> = setOf(
+	"READ",
+	"WRITE",
+	"EXECUTE"
 )
 
 
@@ -35,6 +41,8 @@ fun main(args: Array<String>) {
 			exitProcess(1)
 		}
 	)
+	
+	
 	/*if(argHandler.isAuthorizationRequired()) {
 		businessLogic.authorization()
 	}*/
