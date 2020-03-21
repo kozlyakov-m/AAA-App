@@ -29,7 +29,7 @@ val roles: Set<String> = setOf(
 
 fun main(args: Array<String>) {
     val argHandler = ArgHandler(args)
-    val businessLogic = BusinessLogic(argHandler)
+    val businessLogic = BusinessLogic()
 	
 	if(argHandler.isHelpRequired()) {
 		businessLogic.printHelp()

@@ -1,4 +1,8 @@
 import kotlin.system.exitProcess
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
+import java.util.Date
 
 class BusinessLogic() {
 
@@ -89,13 +93,41 @@ class BusinessLogic() {
         
     }
     
-    fun accounting(res: Permission, ds: String, de: String, vol: String): Session{
+    fun accounting(res: Permission, ds: String, de: String, vol: String): Session?{
+            
+        val volInt = vol.toInteger() ?: return null       
+        val dateStart = ds.toDate() ?: return null
+        val dateEnd = de.toDate() ?: return null
         
+        if( dateEnd >= dateStart && volInt >= 0) {
+            return Session(res, dateStart, dateEnd, volInt)
+        } else {
+            return null
+        }
+               
     }
     
-    private isDateCorrect(date: String): Boolean {
-        val pattern = "^\d{4}-\d{2}-\d{2}$".toRegex()
-        return date.matches(pattern)        
+    private fun String.toDate(pattern: String = "yyyy-MM-dd"): LocalDate?{
+        try {
+            return LocalDate.parse(this, DateTimeFormatter.ofPattern(pattern))
+        } catch (e: DateTimeParseException) { //если дата некорректная возвращаем null
+            return null
+        }
     }
+    
+    private fun String.isDateCorrect(): Boolean {
+        val pattern = "^\\d{4}-\\d{2}-\\d{2}$".toRegex()
+        return this.matches(pattern)
+    }
+    
+    private fun String.toInteger(): Int? {
+        return try {
+            this.toInt()
+        } catch(e: NumberFormatException) {
+            null
+        }
+    }
+    
+    
     
 }

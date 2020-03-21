@@ -1,3 +1,5 @@
-data class Session(val res: Permission, val ds: String, val de: String, val vol: Int) {
+import java.time.LocalDate
+
+data class Session(val res: Permission, val ds: LocalDate, val de: LocalDate, val vol: Int) {
 
 }
