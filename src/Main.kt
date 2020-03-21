@@ -44,10 +44,14 @@ fun main(args: Array<String>) {
 		}
 	)
 	
-	
-	/*if(argHandler.isAuthorizationRequired()) {
-		businessLogic.authorization()
-	}*/
+	val permission: Permission = (
+        if(argHandler.isAuthorizationRequired()) {
+            businessLogic.authorization(argHandler.res, argHandler.role, user.login) ?: exitProcess(6)
+        }
+        else {
+            exitProcess(0) //0 так как аутентификация прошла успешно
+        }
+    )
 	
 	exitProcess(0)	
 }
