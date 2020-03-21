@@ -1,6 +1,8 @@
 import kotlin.system.exitProcess
 
-class BusinessLogic {
+class BusinessLogic(val args: ArgHandler) {
+
+
 
     fun printHelp() {
         println(

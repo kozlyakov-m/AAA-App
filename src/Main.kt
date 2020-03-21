@@ -7,6 +7,6 @@ val users: List<User> = listOf(
 )
 
 fun main(args: Array<String>) {
-    val businessLogic = BusinessLogic()
-    val argHandler = ArgHandler(args, businessLogic)
+    val argHandler = ArgHandler(args)
+    val businessLogic = BusinessLogic(argHandler)
 }
