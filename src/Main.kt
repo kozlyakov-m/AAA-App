@@ -43,6 +43,10 @@ fun main(args: Array<String>) {
 			exitProcess(1)
 		}
 	)
+    
+    /*if(!businessLogic.isRoleExists(argHandler.role)){
+        exitProcess(5)
+    }*/
 	
 	val permission: Permission = (
         if(argHandler.isAuthorizationRequired()) {

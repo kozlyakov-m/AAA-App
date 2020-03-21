@@ -48,7 +48,7 @@ class BusinessLogic(val args: ArgHandler) {
 	
 	private fun isResValid(arg: String): Boolean = TODO()
 	
-    private fun isRoleExists() = true //TODO
+    private fun isRoleExists(role:String): Boolean = roles.contains(role)
     
 	fun authorization(resPath: String, role: String, username: String):Permission? {
 		
@@ -65,7 +65,7 @@ class BusinessLogic(val args: ArgHandler) {
 		//A.C (массив: [A, C]) (доступ запрещен)
 		//A.B.C.D (массив: [A, B, C, D] (доступ запрещен)
 		
-        if(!isRoleExists()) exitProcess(5)//TODO
+        if(!isRoleExists(role)) exitProcess(5)//TODO
         
 		for(permission in permissions) {
         
@@ -79,5 +79,7 @@ class BusinessLogic(val args: ArgHandler) {
 		}
         return null
 	}
+    
+    
 	
 }
