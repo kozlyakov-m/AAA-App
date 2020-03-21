@@ -26,6 +26,8 @@ val roles: Set<String> = setOf(
 		"EXECUTE"
 )
 
+val sessions: MutableList<Session> = mutableListOf()
+
 
 fun main(args: Array<String>) {
     val argHandler = ArgHandler(args)
@@ -62,6 +64,8 @@ fun main(args: Array<String>) {
             exitProcess(0)
         }
     )
+    sessions.add(session)
+    exitProcess(0)
 }
 	
 	
