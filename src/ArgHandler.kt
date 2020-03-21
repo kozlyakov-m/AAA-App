@@ -10,28 +10,24 @@ class ArgHandler(val args: Array<String>) {
     var de: String = ""
 
     init {
-        if (isHelpRequired()) {
+        /*if (isHelpRequired()) {
             exitProcess(1) //надо возвращать в Main
-        }
+        }*/
         if (args.size >= 4) {
             login = args[1]
             pass = args[3]
-        } else {
-            exitProcess(1)
         }
-        if (args.size >= 6) {
+        if (args.size >= 8) {
             res = args[5]
             role = args[7]
         }
-        if (args.size >= 8) {
+        if (args.size >= 12) {
             ds = args[9]
-            de = args[10]
+            de = args[11]
         }
     }
-
-    fun isAuthenticationRequired(): Boolean = login.isEmpty() && pass.isEmpty()
-
-    fun isHelpRequired(): Boolean {
+	
+	fun isHelpRequired(): Boolean {
         if (args.isEmpty()) {
             return true
         } else if (args[0] == "-h") {
@@ -39,4 +35,10 @@ class ArgHandler(val args: Array<String>) {
         }
         return false
     }
+	
+    fun isAuthenticationRequired(): Boolean = !login.isEmpty() && !pass.isEmpty()
+
+	fun isAuthorizationRequired(): Boolean = !res.isEmpty() && !role.isEmpty()
+	
+	
 }

@@ -1,3 +1,5 @@
+import kotlin.system.exitProcess
+
 // global value!!
 val users: List<User> = listOf(
         User("vasya", "123"),
@@ -10,14 +12,23 @@ fun main(args: Array<String>) {
     val argHandler = ArgHandler(args)
     val businessLogic = BusinessLogic(argHandler)
 	
-	if(argHandler.isHelpRequired) {
+	if(argHandler.isHelpRequired()) {
 		businessLogic.printHelp()
 	}
 	
-	if(argHandler.isAuthenticationRequired()) {
-		businessLogic.authentication(argHandler.login, argHandler.pass)
-	}
+	val user: User = (
+		if(argHandler.isAuthenticationRequired()) {
+			businessLogic.authentication(argHandler.login, argHandler.pass)
+		}
+		else {
+			exitProcess(1)
+		}
+	)
+	/*if(argHandler.isAuthorizationRequired()) {
+		businessLogic.authorization()
+	}*/
 	
-	
+	exitProcess(0)	
+}
 	
 	

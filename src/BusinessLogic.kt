@@ -32,7 +32,7 @@ class BusinessLogic(val args: ArgHandler) {
         return pass == user.pass
     }
 
-    fun authentication(login: String, pass: String) {
+    fun authentication(login: String, pass: String): User {
         if (!isLoginValid(login)) {
             exitProcess(2)
         }
@@ -42,5 +42,7 @@ class BusinessLogic(val args: ArgHandler) {
         if (!checkPassword(pass, user)) {
             exitProcess(4)
         }
+		
+		return user
     }
 }
