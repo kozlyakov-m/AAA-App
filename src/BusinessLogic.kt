@@ -46,10 +46,38 @@ class BusinessLogic(val args: ArgHandler) {
 		return user
     }
 	
-	private fun isResValid(arg: String): Boolean {
-		//TODO
+	private fun isResValid(arg: String): Boolean = TODO()
+	
+    private fun isRoleExists() = true //TODO
+    
+	fun authorization(resPath: String, role: String, username: String):Permission? {
+		
+		
+		//делим по точке желаемый ресурс
+		//делим по точке ресурс из коллекции
+		
+		//сравниваем полученные массивы
+		//пример
+		//хотим:
+		//A.B.C (массив: [A, B, C])
+		//есть в базе:
+		//A.B (массив: [A, B]) (доступ разрешен)
+		//A.C (массив: [A, C]) (доступ запрещен)
+		//A.B.C.D (массив: [A, B, C, D] (доступ запрещен)
+		
+        if(!isRoleExists()) exitProcess(5)//TODO
+        
+		for(permission in permissions) {
+        
+            if(username == permission.username && role == permission.role){
+                
+                if(resPath == permission.resPath) {
+                    return permission
+                }
+            }
+            
+		}
+        return null
 	}
-	
-	
 	
 }

@@ -1,3 +1,3 @@
-data class Permission(val res: String, val role: String, val username: String) {
+data class Permission(val resPath: String, val role: String, val username: String) {
 
 }
