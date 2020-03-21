@@ -8,7 +8,7 @@ class ArgHandler(val args: Array<String>) {
     var role: String = ""
     var ds: String = ""
     var de: String = ""
-    var vol: Int = -1
+    var vol: String = "" //will convert to int in BusinessLogic
 
     init {
 
@@ -23,7 +23,9 @@ class ArgHandler(val args: Array<String>) {
         if (args.size >= 14) {
             ds = args[9]
             de = args[11]
-            vol = args[13].toInt()
+            vol = args[13]
+            
+            
         }
     }
 	
@@ -40,5 +42,5 @@ class ArgHandler(val args: Array<String>) {
 
 	fun isAuthorizationRequired(): Boolean = !res.isEmpty() && !role.isEmpty()
 	
-	fun isAccountingRequired(): Boolean = !ds.isEmpty() && !de.isEmpty() && (vol != -1)
+	fun isAccountingRequired(): Boolean = !ds.isEmpty() && !de.isEmpty() && !vol.isEmpty()
 }
