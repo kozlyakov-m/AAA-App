@@ -8,7 +8,7 @@ class ArgHandler(val args: Array<String>) {
     var role: String = ""
     var ds: String = ""
     var de: String = ""
-    var vol: Int = 0
+    var vol: Int = -1
 
     init {
 
@@ -40,5 +40,5 @@ class ArgHandler(val args: Array<String>) {
 
 	fun isAuthorizationRequired(): Boolean = !res.isEmpty() && !role.isEmpty()
 	
-	
+	fun isAccountingRequired(): Boolean = !ds.isEmpty() && !de.isEmpty() && (vol != -1)
 }
