@@ -1,5 +1,3 @@
-import kotlin.system.exitProcess
-
 class ArgHandler(val args: Array<String>) {
     var h: Boolean = false
     var login: String = ""
@@ -24,12 +22,12 @@ class ArgHandler(val args: Array<String>) {
             ds = args[9]
             de = args[11]
             vol = args[13]
-            
-            
+
+
         }
     }
-	
-	fun isHelpRequired(): Boolean {
+
+    fun isHelpRequired(): Boolean {
         if (args.isEmpty()) {
             return true
         } else if (args[0] == "-h") {
@@ -37,10 +35,13 @@ class ArgHandler(val args: Array<String>) {
         }
         return false
     }
-	
-    fun isAuthenticationRequired(): Boolean = !login.isEmpty() && !pass.isEmpty()
 
-	fun isAuthorizationRequired(): Boolean = !res.isEmpty() && !role.isEmpty()
-	
-	fun isAccountingRequired(): Boolean = !ds.isEmpty() && !de.isEmpty() && !vol.isEmpty()
+    fun isAuthenticationRequired(): Boolean =
+            login.isNotEmpty() && pass.isNotEmpty()
+
+    fun isAuthorizationRequired(): Boolean =
+            res.isNotEmpty() && role.isNotEmpty()
+
+    fun isAccountingRequired(): Boolean =
+            ds.isNotEmpty() && de.isNotEmpty() && vol.isNotEmpty()
 }
