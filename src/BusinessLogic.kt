@@ -13,8 +13,8 @@ class BusinessLogic {
     }
 
     private fun isLoginValid(login: String): Boolean {
-        val regex = "^[a-z]{1,10}$".toRegex()
-        return regex.matches(login)
+        val pattern = "^[a-z]{1,10}$".toRegex()
+        return pattern.matches(login)
     }
 
     private fun findUser(login: String, users: List<User>): User? {
@@ -34,6 +34,7 @@ class BusinessLogic {
         if (!isLoginValid(login)) {
             exitProcess(2)
         }
+        // check that user exists in db
         val user = findUser(login, users) ?: exitProcess(3)
 
         if (!checkPassword(pass, user)) {
