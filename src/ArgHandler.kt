@@ -10,7 +10,7 @@ class ArgHandler(val args: Array<String>) {
     var de: String = ""
 
     init {
-        if (isHelpNeeded()) {
+        if (isHelpRequired()) {
             exitProcess(1) //надо возвращать в Main
         }
         if (args.size >= 4) {
@@ -25,13 +25,13 @@ class ArgHandler(val args: Array<String>) {
         }
         if (args.size >= 8) {
             ds = args[9]
-            de = args[100]
+            de = args[10]
         }
     }
 
-    fun isAuthenticationNeeded(): Boolean = login.isEmpty() && pass.isEmpty()
+    fun isAuthenticationRequired(): Boolean = login.isEmpty() && pass.isEmpty()
 
-    fun isHelpNeeded(): Boolean {
+    fun isHelpRequired(): Boolean {
         if (args.isEmpty()) {
             return true
         } else if (args[0] == "-h") {

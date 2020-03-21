@@ -9,4 +9,15 @@ val users: List<User> = listOf(
 fun main(args: Array<String>) {
     val argHandler = ArgHandler(args)
     val businessLogic = BusinessLogic(argHandler)
-}
+	
+	if(argHandler.isHelpRequired) {
+		businessLogic.printHelp()
+	}
+	
+	if(argHandler.isAuthenticationRequired()) {
+		businessLogic.authentication(argHandler.login, argHandler.pass)
+	}
+	
+	
+	
+	
