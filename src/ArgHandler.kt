@@ -39,7 +39,7 @@ class ArgHandler(private val args: Array<String>) {
             parser.parse(args)
         } catch (e: IllegalStateException){
             println(e.message)
-            // exitProcess(0) our Kung - Fu is better !!
+            // exitProcess(0) //пройдут тесты в первоначальном варианте
         }
     }
 

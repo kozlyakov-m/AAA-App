@@ -2,6 +2,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 import kotlin.system.exitProcess
+import java.security.MessageDigest
 
 class BusinessLogic {
 
@@ -127,6 +128,13 @@ class BusinessLogic {
             null
         }
     }
-
+    
+    //stackoverflow driven development
+    private fun String.getHash(salt: String, algorithm: String = "SHA-512"): String{
+        val bytes = (salt+this).toByteArray()
+        val md = MessageDigest.getInstance(algorithm)
+        val digest = md.digest(bytes)
+        return digest.fold("", { str, it -> str + "%02x".format(it) })
+    }
 
 }
