@@ -1,58 +1,44 @@
 import kotlinx.cli.*
+import java.lang.IllegalStateException
 
-class ArgHandler(val args: Array<String>) {
+class ArgHandler(private val args: Array<String>) {
 
-    val parser = ArgParser("app.jar")
-    
+    private val parser = ArgParser("app.jar")
+
     //var h: Boolean = false
-    val login by parser
+    val login: String? by parser
             .option(ArgType.String, shortName = "login")
-            .required()
-    val pass by parser
+
+    val pass: String? by parser
             .option(ArgType.String, shortName = "pass")
-            .default("")
+
     val res by parser
             .option(ArgType.String, shortName = "res")
             .default("")
+
     val role by parser
             .option(ArgType.String, shortName = "role")
             .default("")
+
     val ds by parser
             .option(ArgType.String, shortName = "ds")
             .default("")
+
     val de by parser
             .option(ArgType.String, shortName = "de")
             .default("")
+
     val vol by parser
             .option(ArgType.String, shortName = "vol")
             .default("") //will convert to int in BusinessLogic
 
     init {
         try {
-        parser.parse(args)
-        } catch (e: Exception) {
-        
+            parser.parse(args)
+        } catch (e: IllegalStateException){
+            println(e.message)
         }
     }
-    
-    /* init {
-
-        if (args.size >= 4) {
-            login = args[1]
-            pass = args[3]
-        }
-        if (args.size >= 8) {
-            res = args[5]
-            role = args[7]
-        }
-        if (args.size >= 14) {
-            ds = args[9]
-            de = args[11]
-            vol = args[13]
-
-
-        }
-    }*/
 
     fun isHelpRequired(): Boolean {
         if (args.isEmpty()) {
@@ -64,7 +50,7 @@ class ArgHandler(val args: Array<String>) {
     }
 
     fun isAuthenticationRequired(): Boolean =
-            login.isNotEmpty() && pass.isNotEmpty()
+            !login.isNullOrEmpty() && !pass.isNullOrEmpty()
 
     fun isAuthorizationRequired(): Boolean =
             res.isNotEmpty() && role.isNotEmpty()
