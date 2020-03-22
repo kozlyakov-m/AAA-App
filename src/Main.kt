@@ -1,11 +1,12 @@
+import kotlin.random.Random
 import kotlin.system.exitProcess
 
 // global value!!
 val users: List<User> = listOf(
-        User("vasya", "123", "12345"),
-        User("admin", "admin", "12345"),
-        User("q", "?!#", "12345"),
-        User("abcdefghij", "pass", "12345")
+        User("vasya", "123", "89081"),
+        User("admin", "admin", "92867"),
+        User("q", "?!#", "41290"),
+        User("abcdefghij", "pass", "10216")
 )
 
 val permissions: List<Permission> = listOf(
@@ -28,6 +29,7 @@ val sessions: MutableList<Session> = mutableListOf()
 
 
 fun main(args: Array<String>) {
+
     val argHandler = ArgHandler(args)
     val businessLogic = BusinessLogic()
 

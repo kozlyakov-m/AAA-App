@@ -6,7 +6,6 @@ import java.security.MessageDigest
 
 class BusinessLogic {
 
-
     fun printHelp() {
         println(
                 """
@@ -56,7 +55,7 @@ class BusinessLogic {
 
         return user
     }
-    
+
     private fun isRoleExists(role: String): Boolean = roles.contains(role)
 
     fun authorization(resPath: String, role: String, username: String): Permission? {
