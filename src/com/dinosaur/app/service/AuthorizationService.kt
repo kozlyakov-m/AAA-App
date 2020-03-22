@@ -11,8 +11,7 @@ class AuthorizationService {
                       role: String,
                       username: String): Permission? {
 
-        if (!isRoleExists(role)) exitProcess(5) //возвращаем код 5, если роль не существует
-        //TODO
+        if (!Role.isRoleExists(role)) exitProcess(5) //возвращаем код 5, если роль не существует
         //возможно, перенести в Main
 
         for (permission in permissions) {
@@ -25,8 +24,6 @@ class AuthorizationService {
         }
         return null
     }
-
-    private fun isRoleExists(role: String): Boolean = Role.values().map { it.name }.contains(role)
 
     private fun isChild(pathFromQuery: String, pathFromDB: String): Boolean {
 
