@@ -25,19 +25,15 @@ class AccountingService {
 
     }
 
-    private fun String.toDate(pattern: String = "yyyy-MM-dd"): LocalDate? {
-        return try {
-            LocalDate.parse(this, DateTimeFormatter.ofPattern(pattern))
-        } catch (e: DateTimeParseException) { //если дата некорректная возвращаем null
-            null
-        }
+    private fun String.toDate(pattern: String = "yyyy-MM-dd"): LocalDate? = try {
+        LocalDate.parse(this, DateTimeFormatter.ofPattern(pattern))
+    } catch (e: DateTimeParseException) { //если дата некорректная возвращаем null
+        null
     }
 
-    private fun String.toInteger(): Int? {
-        return try {
-            this.toInt()
-        } catch (e: NumberFormatException) {
-            null
-        }
+    private fun String.toInteger(): Int? = try {
+        this.toInt()
+    } catch (e: NumberFormatException) {
+        null
     }
 }
