@@ -1,29 +1,32 @@
 package com.dinosaur.app.service
 
+import com.dinosaur.app.ExitCodes
 import com.dinosaur.app.Role
 import com.dinosaur.app.domain.Permission
 import kotlin.system.exitProcess
 
 class AuthorizationService(private val permissions: List<Permission>) {
 
+    var permission: Permission? = null
+
     fun authorization(
             resPath: String,
             role: String,
             username: String
-    ): Permission? {
+    ): ExitCodes {
 
-        if (!Role.isRoleExists(role)) exitProcess(5) //возвращаем код 5, если роль не существует
-        //возможно, перенести в Main
+        if (!Role.isRoleExists(role)) return ExitCodes.INVALID_ROLE//возвращаем код 5, если роль не существует
 
-        for (permission in permissions) {
-            if (username != permission.username || role != permission.role) {
+        for (perm in permissions) {
+            if (username != perm.username || role != perm.role) {
                 continue
             }
-            if (isChild(resPath, permission.resPath)) {
-                return permission
+            if (isChild(resPath, perm.resPath)) {
+                permission = perm
+                return ExitCodes.SUCCESS
             }
         }
-        return null
+        return ExitCodes.ACCESS_DENIED
     }
 
     private fun isChild(pathFromQuery: String, pathFromDB: String): Boolean {
