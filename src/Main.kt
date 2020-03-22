@@ -2,10 +2,10 @@ import kotlin.system.exitProcess
 
 // global value!!
 val users: List<User> = listOf(
-        User("vasya", "123"),
-        User("admin", "admin"),
-        User("q", "?!#"),
-        User("abcdefghij", "pass")
+        User("vasya", "123", "12345"),
+        User("admin", "admin", "12345"),
+        User("q", "?!#", "12345"),
+        User("abcdefghij", "pass", "12345")
 )
 
 val permissions: List<Permission> = listOf(
