@@ -1,6 +1,7 @@
 package com.dinosaur.app
 
 import kotlin.system.exitProcess
+import com.dinosaur.app.domain.*
 
 //global collections
 val users: List<User> = listOf(

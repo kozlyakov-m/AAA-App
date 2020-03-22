@@ -1,4 +1,4 @@
-package com.dinosaur.app
+package com.dinosaur.app.domain
 
 import java.time.LocalDate
 
