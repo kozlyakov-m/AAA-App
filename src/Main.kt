@@ -30,11 +30,11 @@ val permissions: List<Permission> = listOf(
         Permission("B", "EXECUTE", "q")
 )
 
-val roles: Set<String> = setOf(
-        "READ",
-        "WRITE",
-        "EXECUTE"
-)
+enum class Role {
+        READ,
+        WRITE,
+        EXECUTE
+}
 
 val sessions: MutableList<Session> = mutableListOf()
 

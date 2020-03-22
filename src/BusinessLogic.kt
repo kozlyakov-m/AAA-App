@@ -46,7 +46,7 @@ class BusinessLogic {
         return user
     }
 
-    private fun isRoleExists(role: String): Boolean = roles.contains(role)
+    private fun isRoleExists(role: String): Boolean = Role.values().map { it.name }.contains(role)
 
     fun authorization(resPath: String,
                       role: String,
