@@ -1,3 +1,5 @@
+package com.dinosaur.app
+
 import kotlin.system.exitProcess
 
 //global collections

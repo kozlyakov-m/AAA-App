@@ -1,3 +1,5 @@
+package com.dinosaur.app
+
 import java.security.MessageDigest
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
