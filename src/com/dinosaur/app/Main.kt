@@ -25,7 +25,7 @@ fun main(args: Array<String>) {
     exitCode = if (argHandler.isAuthorizationRequired()) {
         authorizationService.authorization(argHandler.res, argHandler.role, user.login)
     } else {
-        ExitCodes.SUCCESS //0 так как аутентификация прошла успешно
+        exitProcess(ExitCodes.SUCCESS.code) //0 так как аутентификация прошла успешно
     }
     if (exitCode != ExitCodes.SUCCESS) exitProcess(exitCode.code)
 
