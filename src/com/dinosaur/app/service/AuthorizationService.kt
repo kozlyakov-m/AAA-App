@@ -3,7 +3,6 @@ package com.dinosaur.app.service
 import com.dinosaur.app.ExitCodes
 import com.dinosaur.app.Role
 import com.dinosaur.app.domain.Permission
-import kotlin.system.exitProcess
 
 class AuthorizationService(private val permissions: List<Permission>) {
 

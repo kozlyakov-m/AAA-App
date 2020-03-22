@@ -1,7 +1,6 @@
 package com.dinosaur.app
 
 import com.dinosaur.app.domain.Permission
-import com.dinosaur.app.domain.Session
 import com.dinosaur.app.service.AccountingService
 import com.dinosaur.app.service.AuthenticationService
 import com.dinosaur.app.service.AuthorizationService
@@ -17,7 +16,7 @@ fun main(args: Array<String>) {
     } else {
         ExitCodes.HELP
     }
-    if(exitCode != ExitCodes.SUCCESS) exitProcess(exitCode.code)
+    if (exitCode != ExitCodes.SUCCESS) exitProcess(exitCode.code)
 
     val user = authenticationService.user!! //если user null, программа завершится раньше
 
@@ -28,23 +27,26 @@ fun main(args: Array<String>) {
     } else {
         ExitCodes.SUCCESS //0 так как аутентификация прошла успешно
     }
-    if(exitCode != ExitCodes.SUCCESS) exitProcess(exitCode.code)
+    if (exitCode != ExitCodes.SUCCESS) exitProcess(exitCode.code)
 
     val permission: Permission = authorizationService.permission!!
 
     // if authorization passed create instance of AccountingService
     val accountingService = AccountingService(sessions)
-    val session: Session = if (argHandler.isAccountingRequired()) {
+    exitCode = if (argHandler.isAccountingRequired()) {
         accountingService.accounting(
                 permission,
                 argHandler.ds,
                 argHandler.de,
                 argHandler.vol
-        ) ?: exitProcess(7)
+        )
+
     } else {
-        exitProcess(0)
+        exitProcess(ExitCodes.SUCCESS.code)
     }
 
-    sessions.add(session)
-    exitProcess(0)
+    if (exitCode != ExitCodes.SUCCESS) exitProcess(exitCode.code)
+
+    sessions.add(accountingService.session!!)
+    exitProcess(exitCode.code)
 }

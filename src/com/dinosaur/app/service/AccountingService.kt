@@ -1,5 +1,6 @@
 package com.dinosaur.app.service
 
+import com.dinosaur.app.ExitCodes
 import com.dinosaur.app.domain.Permission
 import com.dinosaur.app.domain.Session
 import java.time.LocalDate
@@ -8,19 +9,22 @@ import java.time.format.DateTimeParseException
 
 class AccountingService(private val sessions: MutableList<Session>) {
 
+    var session: Session? = null
+
     fun accounting(res: Permission,
                    ds: String,
                    de: String,
-                   vol: String): Session? {
+                   vol: String): ExitCodes {
 
-        val volInt = vol.toInteger() ?: return null
-        val dateStart = ds.toDate() ?: return null
-        val dateEnd = de.toDate() ?: return null
+        val volInt = vol.toInteger() ?: return ExitCodes.INVALID_ACTIVITY
+        val dateStart = ds.toDate() ?: return ExitCodes.INVALID_ACTIVITY
+        val dateEnd = de.toDate() ?: return ExitCodes.INVALID_ACTIVITY
 
         return if (dateEnd >= dateStart && volInt >= 0) {
-            Session(res, dateStart, dateEnd, volInt)
+            session = Session(res, dateStart, dateEnd, volInt)
+            ExitCodes.SUCCESS
         } else {
-            null
+            ExitCodes.INVALID_ACTIVITY
         }
 
     }
