@@ -2,14 +2,15 @@ package com.dinosaur.app.service
 
 import com.dinosaur.app.Role
 import com.dinosaur.app.domain.Permission
-import com.dinosaur.app.permissions
 import kotlin.system.exitProcess
 
-class AuthorizationService {
+class AuthorizationService(private val permissions: List<Permission>) {
 
-    fun authorization(resPath: String,
-                      role: String,
-                      username: String): Permission? {
+    fun authorization(
+            resPath: String,
+            role: String,
+            username: String
+    ): Permission? {
 
         if (!Role.isRoleExists(role)) exitProcess(5) //возвращаем код 5, если роль не существует
         //возможно, перенести в Main

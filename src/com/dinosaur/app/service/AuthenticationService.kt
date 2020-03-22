@@ -1,11 +1,10 @@
 package com.dinosaur.app.service
 
 import com.dinosaur.app.domain.User
-import com.dinosaur.app.users
 import java.security.MessageDigest
 import kotlin.system.exitProcess
 
-class AuthenticationService {
+class AuthenticationService(private val users: List<User>) {
     fun authentication(login: String, pass: String): User {
         if (!isLoginValid(login)) {
             exitProcess(2)
@@ -20,8 +19,7 @@ class AuthenticationService {
         return user
     }
 
-    private fun isLoginValid(login: String): Boolean
-            = "^[a-z]{1,10}$".toRegex().matches(login)
+    private fun isLoginValid(login: String): Boolean = "^[a-z]{1,10}$".toRegex().matches(login)
 
     private fun findUser(login: String, users: List<User>): User? {
         for (user in users) {
@@ -32,8 +30,7 @@ class AuthenticationService {
         return null
     }
 
-    private fun checkPassword(pass: String, user: User)
-            = pass.getHash(user.salt) == user.hash
+    private fun checkPassword(pass: String, user: User) = pass.getHash(user.salt) == user.hash
 
     //stackoverflow driven development
     private fun String.getHash(salt: String,
