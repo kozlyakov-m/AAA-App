@@ -1,22 +1,24 @@
 package com.dinosaur.app.service
 
+import com.dinosaur.app.ExitCodes
 import com.dinosaur.app.domain.User
 import java.security.MessageDigest
-import kotlin.system.exitProcess
 
 class AuthenticationService(private val users: List<User>) {
-    fun authentication(login: String, pass: String): User {
+
+    var user: User? = null
+
+    fun authentication(login: String, pass: String): ExitCodes {
         if (!isLoginValid(login)) {
-            exitProcess(2)
+            return ExitCodes.INVALID_LOGIN
         }
         // check that user exists in db
-        val user = findUser(login, users) ?: exitProcess(3)
+        user = findUser(login, users) ?: return ExitCodes.USER_NOT_FOUND
 
-        if (!checkPassword(pass, user)) {
-            exitProcess(4)
+        if (!checkPassword(pass, user!!)) {
+            return ExitCodes.WRONG_PASSWORD
         }
-
-        return user
+        return ExitCodes.SUCCESS
     }
 
     private fun isLoginValid(login: String): Boolean = "^[a-z]{1,10}$".toRegex().matches(login)

@@ -13,11 +13,15 @@ fun main(args: Array<String>) {
     val argHandler = ArgHandler(args)
     val authenticationService = AuthenticationService(users)
 
-    val user: User = if (argHandler.isAuthenticationRequired()) {
+    val exitCode: ExitCodes = if (argHandler.isAuthenticationRequired()) {
         authenticationService.authentication(argHandler.login!!, argHandler.pass!!)
     } else {
-        exitProcess(1)
+        ExitCodes.HELP
     }
+    if(exitCode != ExitCodes.SUCCESS) exitProcess(exitCode.code)
+
+    val user = authenticationService.user!! //если user null, программа завершится раньше
+
     // if authentication passed create instance of AuthorizationService
     val authorizationService = AuthorizationService(permissions)
     val permission: Permission = if (argHandler.isAuthorizationRequired()) {
