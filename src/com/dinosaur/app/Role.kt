@@ -1,3 +1,5 @@
+package com.dinosaur.app
+
 enum class Role {
     READ,
     WRITE,
