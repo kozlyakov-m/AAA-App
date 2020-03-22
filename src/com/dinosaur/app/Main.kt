@@ -2,6 +2,9 @@ package com.dinosaur.app
 
 import kotlin.system.exitProcess
 import com.dinosaur.app.domain.*
+import com.dinosaur.app.service.AccountingService
+import com.dinosaur.app.service.AuthenticationService
+import com.dinosaur.app.service.AuthorizationService
 
 //global collections
 val users: List<User> = listOf(
@@ -44,22 +47,29 @@ val sessions: MutableList<Session> = mutableListOf()
 fun main(args: Array<String>) {
 
     val argHandler = ArgHandler(args)
-    val businessLogic = BusinessLogic()
+    val authenticationService = AuthenticationService()
 
     val user: User = if (argHandler.isAuthenticationRequired()) {
-        businessLogic.authentication(argHandler.login!!, argHandler.pass!!)
+        authenticationService.authentication(argHandler.login!!, argHandler.pass!!)
     } else {
         exitProcess(1)
     }
-
+    // if authentication passed create authorization instance
+    val authorizationService = AuthorizationService()
     val permission: Permission = if (argHandler.isAuthorizationRequired()) {
-        businessLogic.authorization(argHandler.res, argHandler.role, user.login) ?: exitProcess(6)
+        authorizationService.authorization(argHandler.res, argHandler.role, user.login) ?: exitProcess(6)
     } else {
         exitProcess(0) //0 так как аутентификация прошла успешно
     }
-
+    // if authorization passed create accounting instance
+    val accountingService = AccountingService()
     val session: Session = if (argHandler.isAccountingRequired()) {
-        businessLogic.accounting(permission, argHandler.ds, argHandler.de, argHandler.vol) ?: exitProcess(7)
+        accountingService.accounting(
+                permission,
+                argHandler.ds,
+                argHandler.de,
+                argHandler.vol
+        ) ?: exitProcess(7)
     } else {
         exitProcess(0)
     }
