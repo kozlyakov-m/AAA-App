@@ -43,26 +43,23 @@ fun main(args: Array<String>) {
     val argHandler = ArgHandler(args)
     val businessLogic = BusinessLogic()
 
-    val user: User =
-            if (argHandler.isAuthenticationRequired()) {
-                businessLogic.authentication(argHandler.login!!, argHandler.pass!!)
-            } else {
-                exitProcess(1)
-            }
+    val user: User = if (argHandler.isAuthenticationRequired()) {
+        businessLogic.authentication(argHandler.login!!, argHandler.pass!!)
+    } else {
+        exitProcess(1)
+    }
 
-    val permission: Permission =
-            if (argHandler.isAuthorizationRequired()) {
-                businessLogic.authorization(argHandler.res, argHandler.role, user.login) ?: exitProcess(6)
-            } else {
-                exitProcess(0) //0 так как аутентификация прошла успешно
-            }
+    val permission: Permission = if (argHandler.isAuthorizationRequired()) {
+        businessLogic.authorization(argHandler.res, argHandler.role, user.login) ?: exitProcess(6)
+    } else {
+        exitProcess(0) //0 так как аутентификация прошла успешно
+    }
 
-    val session: Session =
-            if (argHandler.isAccountingRequired()) {
-                businessLogic.accounting(permission, argHandler.ds, argHandler.de, argHandler.vol) ?: exitProcess(7)
-            } else {
-                exitProcess(0)
-            }
+    val session: Session = if (argHandler.isAccountingRequired()) {
+        businessLogic.accounting(permission, argHandler.ds, argHandler.de, argHandler.vol) ?: exitProcess(7)
+    } else {
+        exitProcess(0)
+    }
 
     sessions.add(session)
     exitProcess(0)
