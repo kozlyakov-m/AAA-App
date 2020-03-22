@@ -1,8 +1,8 @@
+import java.security.MessageDigest
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 import kotlin.system.exitProcess
-import java.security.MessageDigest
 
 class BusinessLogic {
 

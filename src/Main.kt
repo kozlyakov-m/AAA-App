@@ -1,5 +1,3 @@
-import java.security.MessageDigest
-import kotlin.random.Random
 import kotlin.system.exitProcess
 
 //global collections

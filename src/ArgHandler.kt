@@ -1,7 +1,6 @@
-import kotlinx.cli.ArgType
 import kotlinx.cli.ArgParser
+import kotlinx.cli.ArgType
 import kotlinx.cli.default
-import kotlin.system.exitProcess
 
 class ArgHandler(private val args: Array<String>) {
 
@@ -37,7 +36,7 @@ class ArgHandler(private val args: Array<String>) {
     init {
         try {
             parser.parse(args)
-        } catch (e: IllegalStateException){
+        } catch (e: IllegalStateException) {
             println(e.message)
             // exitProcess(0) //пройдут тесты в первоначальном варианте
         }
