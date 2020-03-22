@@ -1,2 +1,2 @@
-data class User(val login: String, val pass: String, val salt: String) {
+data class User(val login: String, val hash: String, val salt: String) {
 }
