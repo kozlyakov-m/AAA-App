@@ -36,7 +36,6 @@ class AuthenticationService {
             = pass.getHash(user.salt) == user.hash
 
     //stackoverflow driven development
-    @JvmOverloads
     private fun String.getHash(salt: String,
                                algorithm: String = "SHA-512"): String {
         val bytes = (salt + this).toByteArray()
