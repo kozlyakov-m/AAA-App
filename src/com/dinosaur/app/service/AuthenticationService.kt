@@ -20,10 +20,8 @@ class AuthenticationService {
         return user
     }
 
-    private fun isLoginValid(login: String): Boolean {
-        val pattern = "^[a-z]{1,10}$".toRegex()
-        return pattern.matches(login)
-    }
+    private fun isLoginValid(login: String): Boolean
+            = "^[a-z]{1,10}$".toRegex().matches(login)
 
     private fun findUser(login: String, users: List<User>): User? {
         for (user in users) {
@@ -34,12 +32,13 @@ class AuthenticationService {
         return null
     }
 
-    private fun checkPassword(pass: String, user: User): Boolean {
-        return pass.getHash(user.salt) == user.hash
-    }
+    private fun checkPassword(pass: String, user: User)
+            = pass.getHash(user.salt) == user.hash
 
     //stackoverflow driven development
-    private fun String.getHash(salt: String, algorithm: String = "SHA-512"): String {
+    @JvmOverloads
+    private fun String.getHash(salt: String,
+                               algorithm: String = "SHA-512"): String {
         val bytes = (salt + this).toByteArray()
         val md = MessageDigest.getInstance(algorithm)
         val digest = md.digest(bytes)
