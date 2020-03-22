@@ -31,7 +31,7 @@ class BusinessLogic {
     }
 
     private fun checkPassword(pass: String, user: User): Boolean {
-        return pass == user.hash
+        return pass.getHash(user.salt) == user.hash
     }
 
     //stackoverflow driven development
