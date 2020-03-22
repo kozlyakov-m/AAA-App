@@ -31,9 +31,9 @@ fun main(args: Array<String>) {
     val argHandler = ArgHandler(args)
     val businessLogic = BusinessLogic()
 
-    if (argHandler.isHelpRequired()) {
-        businessLogic.printHelp()
-    }
+//    if (argHandler.isHelpRequired()) {
+//        businessLogic.printHelp()
+//    }
 
     val user: User = (
             if (argHandler.isAuthenticationRequired()) {

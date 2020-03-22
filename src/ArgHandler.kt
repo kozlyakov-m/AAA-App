@@ -1,6 +1,7 @@
 import kotlinx.cli.ArgType
 import kotlinx.cli.ArgParser
 import kotlinx.cli.default
+import kotlin.system.exitProcess
 
 class ArgHandler(private val args: Array<String>) {
 
@@ -38,17 +39,18 @@ class ArgHandler(private val args: Array<String>) {
             parser.parse(args)
         } catch (e: IllegalStateException){
             println(e.message)
+            // exitProcess(0) our Kung - Fu is better !!
         }
     }
 
-    fun isHelpRequired(): Boolean {
-        if (args.isEmpty()) {
-            return true
-        } else if (args[0] == "-h") {
-            return true
-        }
-        return false
-    }
+//    fun isHelpRequired(): Boolean {
+//        if (args.isEmpty()) {
+//            return true
+//        } else if (args[0] == "-h") {
+//            return true
+//        }
+//        return false
+//    }
 
     fun isAuthenticationRequired(): Boolean =
             !login.isNullOrEmpty() && !pass.isNullOrEmpty()
