@@ -42,15 +42,6 @@ class ArgHandler(private val args: Array<String>) {
         }
     }
 
-//    fun isHelpRequired(): Boolean {
-//        if (args.isEmpty()) {
-//            return true
-//        } else if (args[0] == "-h") {
-//            return true
-//        }
-//        return false
-//    }
-
     fun isAuthenticationRequired(): Boolean =
             !login.isNullOrEmpty() && !pass.isNullOrEmpty()
 
