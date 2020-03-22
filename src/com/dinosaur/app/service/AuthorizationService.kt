@@ -1,6 +1,6 @@
 package com.dinosaur.app.service
 
-import com.dinosaur.app.Role
+import Role
 import com.dinosaur.app.domain.Permission
 import com.dinosaur.app.permissions
 import kotlin.system.exitProcess

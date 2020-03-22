@@ -36,12 +36,6 @@ val permissions: List<Permission> = listOf(
         Permission("B", "EXECUTE", "q")
 )
 
-enum class Role {
-        READ,
-        WRITE,
-        EXECUTE
-}
-
 val sessions: MutableList<Session> = mutableListOf()
 
 fun main(args: Array<String>) {
