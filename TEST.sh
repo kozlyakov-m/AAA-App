@@ -4,7 +4,7 @@ function test() {
     test_name=$1
     params=$2
     expected_status=$3
-    output=$(./run.sh $params)
+    output=$(./RUN.sh $params)
     actual_status=$?
 
     if [ $actual_status -eq $expected_status ]
