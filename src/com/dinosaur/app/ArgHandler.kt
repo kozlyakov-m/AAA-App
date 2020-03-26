@@ -22,7 +22,6 @@ class ArgHandler(args: Array<String>) {
     val res: String by parser
             .option(ArgType.String, null, "res", null, null)
             .default("")
-
     val role: String by parser
             .option(ArgType.String, null, "role", null, null)
             .default("")

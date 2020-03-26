@@ -1,5 +1,9 @@
 language: java
 
-before_script: ./BUILD.sh
+before_script: 
+    - chmod -x BUILD.sh
+    - chmod -x TEST  .sh
+    - ./BUILD.sh
 
-script: ./TEST.sh
+script: 
+    - ./TEST.sh
