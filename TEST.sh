@@ -1,6 +1,10 @@
 #!/bin/bash
 
+test_passed=0
+test_failed=0
+
 function test() {
+
     test_name=$1
     params=$2
     expected_status=$3
@@ -9,8 +13,10 @@ function test() {
 
     if [ $actual_status -eq $expected_status ]
     then
+    ((test_passed++))
     echo -e "\033[32m$test_name passed \033[0m"
     else
+    ((test_failed++))
     echo -e "\033[31m$test_name failed \033[0m"
     fi
 
@@ -38,3 +44,6 @@ test "T4.2" "-login vasya -pass 123 -res A -role READ -ds 2020.03.10 -de 2020.03
 test "T4.3" "-login vasya -pass 123 -res A -role READ -ds 2020-03-10 -de 2020-03-11 -vol aaaa"  7
 test "T4.4" "-login vasya -pass 123 -res A -role EXECUTE -ds 01.02.3012 -de 01.02.2030 -vol aaa"  6
 test "T4.5" "-login vasya -pass 123 -res A -role READ -ds 2020-03-11 -de 2020-03-10 -vol 100"  7
+
+echo $test_failed
+echo $test_passed
