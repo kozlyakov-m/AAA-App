@@ -2,8 +2,8 @@
 [![Build Status](https://travis-ci.org/kozlyakov-m/AAA-App.svg?branch=master)](https://travis-ci.org/kozlyakov-m/AAA-App)
 
 Планы выполнения:  
-1. [Первый набор требований](/ROADMAP1.md)  
-2. [Второй набор требований](/ROADMAP2.md)
+1. [Первый набор требований](../ROADMAP1.md)  
+2. [Второй набор требований](../ROADMAP2.md)
 
 Сборка:  
 Для сборки проекта необходимо запустить скрипт BUILD.sh 
