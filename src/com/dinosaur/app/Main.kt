@@ -5,8 +5,23 @@ import com.dinosaur.app.service.AccountingService
 import com.dinosaur.app.service.AuthenticationService
 import com.dinosaur.app.service.AuthorizationService
 import kotlin.system.exitProcess
+import java.sql.*
 
 fun main(args: Array<String>) {
+
+    val conn: Connection = DriverManager.
+            getConnection("jdbc:h2:./test", "sa", "");
+
+    val q = "CREATE TABLE users (id int, login varchar(255))"
+    val q1 = "INSERT INTO users VALUES(1, 'name1')"
+    val q2 = "SELECT * FROM users"
+    val stmt = conn.createStatement()
+//    val res = stmt.execute(q)
+//    val res1 = stmt.execute(q1)
+    val res2 = stmt.executeQuery(q2)
+    res2.next()
+    println(res2.getString("id"))
+    conn.close()
 
     val argHandler = ArgHandler(args)
     val authenticationService = AuthenticationService(users)
