@@ -2,9 +2,10 @@ package com.project.app.service
 
 import com.project.app.ExitCodes
 import com.project.app.Role
+import com.project.app.dao.AuthorizationDAO
 import com.project.app.domain.Permission
 
-class AuthorizationService(private val permissions: List<Permission>) {
+class AuthorizationService(val authorizationDAO: AuthorizationDAO) {
 
     var permission: Permission? = null
 
@@ -16,16 +17,13 @@ class AuthorizationService(private val permissions: List<Permission>) {
 
         if (!Role.isRoleExists(role)) return ExitCodes.INVALID_ROLE // возвращаем код 5, если роль не существует
 
-        for (perm in permissions) {
-            if (username != perm.username || role != perm.role) {
-                continue
-            }
-            if (isChild(resPath, perm.resPath)) {
-                permission = perm
-                return ExitCodes.SUCCESS
-            }
-        }
-        return ExitCodes.ACCESS_DENIED
+        val nodes = resPath.split(".")
+        permission = authorizationDAO.getResource(username, role, nodes)
+
+        return if (permission != null)
+            ExitCodes.SUCCESS
+        else
+            ExitCodes.ACCESS_DENIED
     }
 
     private fun isChild(pathFromQuery: String, pathFromDB: String): Boolean {

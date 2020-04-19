@@ -25,13 +25,13 @@ val users: List<User> = listOf(
 )
 
 val permissions: List<Permission> = listOf(
-        Permission("A", "READ", "vasya"),
-        Permission("A.B.C", "WRITE", "vasya"),
-        Permission("A.B", "EXECUTE", "admin"),
-        Permission("A", "READ", "admin"),
-        Permission("A.B", "WRITE", "admin"),
-        Permission("A.B.C", "READ", "admin"),
-        Permission("B", "EXECUTE", "q")
+        Permission(1,"A", "READ", "vasya"),
+        Permission(2, "A.B.C", "WRITE", "vasya"),
+        Permission(3, "A.B", "EXECUTE", "admin"),
+        Permission(4, "A", "READ", "admin"),
+        Permission(5, "A.B", "WRITE", "admin"),
+        Permission(6, "A.B.C", "READ", "admin"),
+        Permission(7, "B", "EXECUTE", "q")
 )
 
 val sessions: MutableList<Session> = mutableListOf()

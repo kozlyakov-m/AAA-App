@@ -1,6 +1,7 @@
 package com.project.app
 
 import com.project.app.dao.AuthenticationDAO
+import com.project.app.dao.AuthorizationDAO
 import com.project.app.domain.Permission
 import com.project.app.service.AccountingService
 import com.project.app.service.AuthenticationService
@@ -42,7 +43,8 @@ fun main(args: Array<String>) {
         val user = authenticationService.user!! // если user null, программа завершится раньше
 
         // if authentication passed create instance of AuthorizationService
-        val authorizationService = AuthorizationService(permissions)
+        val authorizationDAO = AuthorizationDAO(dbConnection)
+        val authorizationService = AuthorizationService(authorizationDAO)
         exitCode = if (argHandler.isAuthorizationRequired()) {
             authorizationService.authorization(argHandler.res, argHandler.role, user.login)
         } else {
