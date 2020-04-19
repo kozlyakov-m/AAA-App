@@ -1,10 +1,10 @@
-language: kotlin
+language: java
 
 before_script:
     - sudo snap install --classic kotlin
-    - chmod +x BUILD.sh
+    - chmod +x gradlew
     - chmod +x TEST.sh
-    - ./BUILD.sh
+    - ./gradlew shadowJar
 
 script: 
     - ./TEST.sh
