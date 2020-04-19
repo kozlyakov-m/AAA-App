@@ -1,4 +1,4 @@
-package com.dinosaur.app
+package com.project.app
 
 import kotlinx.cli.ArgParser
 import kotlinx.cli.ArgType
@@ -36,7 +36,7 @@ class ArgHandler(args: Array<String>) {
 
     val vol: String by parser
             .option(ArgType.String, null, "vol", null, null)
-            .default("") //will convert to int in BusinessLogic
+            .default("") // will convert to int in BusinessLogic
 
     init {
         try {

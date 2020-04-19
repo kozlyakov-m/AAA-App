@@ -1,7 +1,7 @@
-package com.dinosaur.app.service
+package com.project.app.service
 
-import com.dinosaur.app.ExitCodes
-import com.dinosaur.app.domain.User
+import com.project.app.ExitCodes
+import com.project.app.domain.User
 import java.security.MessageDigest
 
 class AuthenticationService(private val users: List<User>) {
@@ -34,9 +34,11 @@ class AuthenticationService(private val users: List<User>) {
 
     private fun checkPassword(pass: String, user: User) = pass.getHash(user.salt) == user.hash
 
-    //stackoverflow driven development
-    private fun String.getHash(salt: String,
-                               algorithm: String = "SHA-512"): String {
+    // stackoverflow driven development
+    private fun String.getHash(
+        salt: String,
+        algorithm: String = "SHA-512"
+    ): String {
         val bytes = (salt + this).toByteArray()
         val md = MessageDigest.getInstance(algorithm)
         val digest = md.digest(bytes)

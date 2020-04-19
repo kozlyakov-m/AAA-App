@@ -1,4 +1,4 @@
-package com.dinosaur.app
+package com.project.app
 
 enum class Role {
     READ,

@@ -1,15 +1,16 @@
-package com.dinosaur.app
+package com.project.app
 
-import com.dinosaur.app.domain.Permission
-import com.dinosaur.app.service.AccountingService
-import com.dinosaur.app.service.AuthenticationService
-import com.dinosaur.app.service.AuthorizationService
-import kotlin.system.exitProcess
+import com.project.app.domain.Permission
+import com.project.app.service.AccountingService
+import com.project.app.service.AuthenticationService
+import com.project.app.service.AuthorizationService
 import java.sql.*
+import kotlin.system.exitProcess
+import org.flywaydb.core.Flyway
 
 fun main(args: Array<String>) {
 
-    val conn: Connection = DriverManager.
+    /*val conn: Connection = DriverManager.
             getConnection("jdbc:h2:./test", "sa", "");
 
     val q = "CREATE TABLE users (id int, login varchar(255))"
@@ -21,7 +22,13 @@ fun main(args: Array<String>) {
     val res2 = stmt.executeQuery(q2)
     res2.next()
     println(res2.getString("id"))
-    conn.close()
+    conn.close()*/
+
+    val flyway = Flyway.configure()
+            .dataSource("jdbc:h2:./AAA-App", "sa", "")
+            .locations("filesystem:db")
+            .load()
+    flyway.migrate()
 
     val argHandler = ArgHandler(args)
     val authenticationService = AuthenticationService(users)
@@ -33,14 +40,14 @@ fun main(args: Array<String>) {
     }
     if (exitCode != ExitCodes.SUCCESS) exitProcess(exitCode.code)
 
-    val user = authenticationService.user!! //если user null, программа завершится раньше
+    val user = authenticationService.user!! // если user null, программа завершится раньше
 
     // if authentication passed create instance of AuthorizationService
     val authorizationService = AuthorizationService(permissions)
     exitCode = if (argHandler.isAuthorizationRequired()) {
         authorizationService.authorization(argHandler.res, argHandler.role, user.login)
     } else {
-        exitProcess(ExitCodes.SUCCESS.code) //0 так как аутентификация прошла успешно
+        exitProcess(ExitCodes.SUCCESS.code) // 0 так как аутентификация прошла успешно
     }
     if (exitCode != ExitCodes.SUCCESS) exitProcess(exitCode.code)
 
@@ -55,7 +62,6 @@ fun main(args: Array<String>) {
                 argHandler.de,
                 argHandler.vol
         )
-
     } else {
         exitProcess(ExitCodes.SUCCESS.code)
     }

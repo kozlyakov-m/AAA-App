@@ -1,10 +1,10 @@
-package com.dinosaur.app
+package com.project.app
 
-import com.dinosaur.app.domain.Permission
-import com.dinosaur.app.domain.Session
-import com.dinosaur.app.domain.User
+import com.project.app.domain.Permission
+import com.project.app.domain.Session
+import com.project.app.domain.User
 
-//global collections
+// global collections
 val users: List<User> = listOf(
         User(
                 "vasya",
