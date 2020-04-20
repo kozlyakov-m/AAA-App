@@ -12,6 +12,7 @@ class AccountingService(val accountingDAO: AccountingDAO) {
 
     var session: Session? = null
 
+    @Suppress("ReturnCount")
     fun accounting(
         res: Permission,
         ds: String,

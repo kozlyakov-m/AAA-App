@@ -4,6 +4,8 @@ import com.project.app.domain.Permission
 import java.sql.Connection
 
 class AccountingDAO(val dbConnection: Connection) {
+
+    @Suppress("MagicNumber")
     fun writeSession(res: Permission, ds: String, de: String, vol: Int) {
         val query = "INSERT INTO sessions (login, res, role, ds, de, vol) VALUES (?, ?, ?, ?, ?, ?)"
         val statement = dbConnection.prepareStatement(query)

@@ -10,7 +10,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.2.0'
     id 'jacoco'
     id 'org.jmailen.kotlinter' version '2.3.2'
-    //id 'io.gitlab.arturbosch.detekt' version '1.7.4'
+    id 'io.gitlab.arturbosch.detekt' version '1.7.4'
 }
 
 repositories {
@@ -68,7 +68,7 @@ kotlinter {
     disabledRules = ["no-wildcard-imports"]
 }
 
-/*detekt {
+detekt {
     config = files("$projectDir/detekt.yml")
     buildUponDefaultConfig = true
-}*/
+}

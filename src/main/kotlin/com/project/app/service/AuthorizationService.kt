@@ -25,21 +25,4 @@ class AuthorizationService(val authorizationDAO: AuthorizationDAO) {
         else
             ExitCodes.ACCESS_DENIED
     }
-
-    private fun isChild(pathFromQuery: String, pathFromDB: String): Boolean {
-
-        // делим по точке желаемый ресурс и ресурс из коллекции
-        val query: Array<String> = pathFromQuery.split(".").toTypedArray()
-        val resFromDB: Array<String> = pathFromDB.split(".").toTypedArray()
-
-        if (query.size < resFromDB.size) { // если запрос короче чем ресурс из бд, то это не потомок
-            return false
-        } else { // иначе проверяем совпадение узлов по порядку (от 0 до длины ресурса из бд)
-
-            for (i in resFromDB.indices) {
-                if (resFromDB[i] != query[i]) return false
-            }
-            return true
-        }
-    }
 }

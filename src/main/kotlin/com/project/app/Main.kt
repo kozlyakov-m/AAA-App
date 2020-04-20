@@ -7,11 +7,10 @@ import com.project.app.domain.Permission
 import com.project.app.service.AccountingService
 import com.project.app.service.AuthenticationService
 import com.project.app.service.AuthorizationService
-
-import kotlin.system.exitProcess
-import org.flywaydb.core.Flyway
 import java.sql.Connection
 import java.sql.DriverManager
+import kotlin.system.exitProcess
+import org.flywaydb.core.Flyway
 
 fun main(args: Array<String>) {
 
@@ -21,8 +20,8 @@ fun main(args: Array<String>) {
             .load()
     flyway.migrate()
 
-    val dbConnection: Connection =  DriverManager.
-            getConnection("jdbc:h2:./AAA-App", "sa", "")
+    val dbConnection: Connection = DriverManager
+            .getConnection("jdbc:h2:./AAA-App", "sa", "")
 
     dbConnection.use {
         val argHandler = ArgHandler(args)
