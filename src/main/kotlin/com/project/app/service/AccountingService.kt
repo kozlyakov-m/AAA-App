@@ -1,13 +1,14 @@
 package com.project.app.service
 
 import com.project.app.ExitCodes
+import com.project.app.dao.AccountingDAO
 import com.project.app.domain.Permission
 import com.project.app.domain.Session
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 
-class AccountingService(private val sessions: MutableList<Session>) {
+class AccountingService(val accountingDAO: AccountingDAO) {
 
     var session: Session? = null
 
@@ -24,6 +25,7 @@ class AccountingService(private val sessions: MutableList<Session>) {
 
         return if (dateEnd >= dateStart && volInt >= 0) {
             session = Session(res, dateStart, dateEnd, volInt)
+            accountingDAO.writeSession(res, ds, de, volInt)
             ExitCodes.SUCCESS
         } else {
             ExitCodes.INVALID_ACTIVITY

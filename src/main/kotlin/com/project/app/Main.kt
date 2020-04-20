@@ -1,5 +1,6 @@
 package com.project.app
 
+import com.project.app.dao.AccountingDAO
 import com.project.app.dao.AuthenticationDAO
 import com.project.app.dao.AuthorizationDAO
 import com.project.app.domain.Permission
@@ -13,10 +14,6 @@ import java.sql.Connection
 import java.sql.DriverManager
 
 fun main(args: Array<String>) {
-
-    /*val conn: Connection = DriverManager.
-            getConnection("jdbc:h2:./test", "sa", "");
-    conn.close()*/
 
     val flyway = Flyway.configure()
             .dataSource("jdbc:h2:./AAA-App", "sa", "")
@@ -55,7 +52,8 @@ fun main(args: Array<String>) {
         val permission: Permission = authorizationService.permission!!
 
         // if authorization passed create instance of AccountingService
-        val accountingService = AccountingService(sessions)
+        val accountingDAO = AccountingDAO(dbConnection)
+        val accountingService = AccountingService(accountingDAO)
         exitCode = if (argHandler.isAccountingRequired()) {
             accountingService.accounting(
                     permission,
@@ -67,9 +65,6 @@ fun main(args: Array<String>) {
             exitProcess(ExitCodes.SUCCESS.code)
         }
 
-        if (exitCode != ExitCodes.SUCCESS) exitProcess(exitCode.code)
-
-        sessions.add(accountingService.session!!)
         exitProcess(exitCode.code)
     }
 }
