@@ -8,3 +8,5 @@
  */
 
 rootProject.name = 'AAA-App'
+include 'app'
+include 'web'
