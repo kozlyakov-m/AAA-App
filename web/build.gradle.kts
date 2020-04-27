@@ -9,12 +9,17 @@ repositories {
     jcenter()
 }
 
-val staging by configurations.creating
+val staging: Configuration by configurations.creating
+
 
 dependencies {
     staging("com.heroku:webapp-runner-main:9.0.31.0")
     providedCompile("javax.servlet:javax.servlet-api:3.1.0")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+    implementation("org.apache.logging.log4j:log4j-api-kotlin:1.0.0")
+    implementation("org.apache.logging.log4j:log4j-api:2.1")
+    implementation("org.apache.logging.log4j:log4j-core:2.1")
 }
 
 tasks {
