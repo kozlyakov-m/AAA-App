@@ -1,7 +1,6 @@
 language: java
 
 install:
-    - sudo snap install --classic kotlin
     - chmod +x gradlew
     - chmod +x TEST.sh
 
