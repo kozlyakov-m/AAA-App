@@ -18,6 +18,11 @@ dependencies {
 }
 
 tasks {
+
+    build {
+        dependsOn(war)
+    }
+
     val copyToLib by registering(Copy::class) {
         into("$buildDir/server")
         from(staging) {
