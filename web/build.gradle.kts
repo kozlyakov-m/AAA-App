@@ -13,16 +13,11 @@ val staging by configurations.creating
 
 dependencies {
     staging("com.heroku:webapp-runner-main:9.0.31.0")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     providedCompile("javax.servlet:javax.servlet-api:3.1.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 }
 
 tasks {
-
-    build {
-        dependsOn(war)
-    }
-
     val copyToLib by registering(Copy::class) {
         into("$buildDir/server")
         from(staging) {
@@ -31,9 +26,10 @@ tasks {
     }
 
     register("stage") {
-        dependsOn(build, war, copyToLib)
+        dependsOn(war, copyToLib)
     }
 }
+
 
 
 
