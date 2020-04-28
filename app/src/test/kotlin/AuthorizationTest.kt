@@ -9,7 +9,7 @@ import org.spekframework.spek2.Spek
 
 object AuthorizationTest : Spek({
     // Setup AuthenticationDAO mock
-    val daoMock = Mockito.mock(AuthenticationDAO::class.java)
+    val daoMock = Mockito.mock(AuthorizationDAO::class.java)
 
     Mockito.`when`(daoMock.getResource("vasya", "READ", "A.B")).thenReturn(Permission(1, "A.B", "READ", "vasya"))
     Mockito.`when`(daoMock.getResource("admin", "WRITE", "A")).thenReturn(Permission(2, "A", "WRITE", "admin"))
