@@ -3,11 +3,18 @@ plugins {
 	id ("org.gretty") version "3.0.2"
     id("com.github.johnrengelman.shadow") version "5.1.0"
     war
+    application
 }
 
 repositories {
     mavenCentral()
     jcenter()
+}
+
+
+application {
+    mainClassName = "com.project.web.JettyServer"
+    applicationName = "app"
 }
 
 val staging: Configuration by configurations.creating
