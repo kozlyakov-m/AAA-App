@@ -15,12 +15,11 @@ class AuthorizationService(val authorizationDAO: AuthorizationDAO) {
         username: String
     ): ExitCodes {
 
-        if (!Role.isRoleExists(role)) return ExitCodes.INVALID_ROLE // возвращаем код 5, если роль не существует
+        if (!Role.isRoleExists(role)) return ExitCodes.INVALID_ROLE
 
-        val nodes = resPath.split(".")
         permission = authorizationDAO.getResource(username, role, resPath)
 
-        return if (permission != null)
+      return if (permission != null)
             ExitCodes.SUCCESS
         else
             ExitCodes.ACCESS_DENIED
