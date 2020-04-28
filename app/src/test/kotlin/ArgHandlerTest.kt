@@ -8,22 +8,6 @@ object ArgHandlerTest : Spek({
     lateinit var args: Array<String>
     lateinit var argHandler: ArgHandler
 
-    /*group("No args or wrong args") {
-        test("No args") {
-            args = emptyArray()
-            argHandler = ArgHandler(args) // вот это по идее beforeEachTest, но args каждый раз разный должен быть
-
-            assertFalse(argHandler.isArgs())
-        }
-
-        test("Wrong args") {
-            args = arrayOf("-lagin", "aaa", "-psss", "13456")
-            argHandler = ArgHandler(args)
-
-            assertTrue(argHandler.help)
-        }
-    }*/
-
     group("Authentication arguments") {
         test("No login") {
             args = arrayOf("-pass", "123")

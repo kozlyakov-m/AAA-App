@@ -6,7 +6,7 @@ import java.sql.Connection
 class AuthorizationDAO(val dbConnection: Connection) {
 
     @Suppress("MagicNumber")
-    fun getResource(login: String, role: String, resPath: String): Permission? {
+    fun getResource(resPath:String, role: String, login: String): Permission? {
 
         val query = """
                     SELECT * FROM permissions 
