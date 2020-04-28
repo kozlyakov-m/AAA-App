@@ -6,17 +6,17 @@ import java.sql.Connection
 class AuthorizationDAO(val dbConnection: Connection) {
 
     @Suppress("MagicNumber")
-    fun getResource(login: String, role: String, nodes: List<String>): Permission? {
+    fun getResource(login: String, role: String, resPath: String): Permission? {
 
-        val builder = StringBuilder()
-        builder.append(
-                "SELECT * FROM permissions WHERE  login = ? AND role = ? AND (res = ?"
-        )
-        for (index in 1 until nodes.size) { // -1 because one "resource = ?" is already in query
-            builder.append(" OR res = ?")
-        }
-        builder.append(")")
-        val query = builder.toString()
+        val query = """
+                    SELECT * FROM permissions 
+                    WHERE login =? 
+                    AND role = ? 
+                    AND 
+                    (CONCAT(res,'.') = SUBSTRING(?,1,LENGTH(res)+1)
+                    OR 
+                    res = ?)
+                    """
 
         val statement = dbConnection.prepareStatement(query)
 
@@ -25,11 +25,8 @@ class AuthorizationDAO(val dbConnection: Connection) {
         statement.use {
             it.setString(1, login)
             it.setString(2, role)
-            for (index in nodes.indices) {
-                val currentNode = nodes.subList(0, index + 1).joinToString(".")
-                it.setString(index + 3, currentNode)
-                // +3 because prepared statement numeration starts from 1 and 1st, 2nd is already taken
-            }
+            it.setString(3, resPath)
+            it.setString(4, resPath)
 
             val result = statement.executeQuery()
             if (result.next()) {
