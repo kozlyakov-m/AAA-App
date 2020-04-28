@@ -1,4 +1,4 @@
-package servlets
+package com.project.web.servlets
 
 import com.google.inject.Singleton
 import java.io.IOException

@@ -1,6 +1,7 @@
 plugins {
 	id("org.jetbrains.kotlin.jvm") version "1.3.71"
 	id ("org.gretty") version "3.0.2"
+    id("com.github.johnrengelman.shadow") version "5.1.0"
     war
 }
 
@@ -17,6 +18,13 @@ dependencies {
     providedCompile("javax.servlet:javax.servlet-api:3.1.0")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
+    implementation("org.eclipse.jetty:jetty-server:9.4.25.v20191220")
+    implementation("org.eclipse.jetty:jetty-servlet:9.4.25.v20191220")
+
+    implementation("org.eclipse.jetty:jetty-webapp:9.4.25.v20191220")
+    implementation("org.eclipse.jetty:jetty-annotations:9.4.25.v20191220")
+    implementation("org.eclipse.jetty:apache-jsp:9.4.25.v20191220")
+
     implementation("com.google.inject:guice:4.2.3")
     implementation("com.google.inject.extensions:guice-servlet:4.2.3")
 
@@ -27,14 +35,16 @@ dependencies {
 
 tasks {
     val copyToLib by registering(Copy::class) {
-        into("$buildDir/server")
-        from(staging) {
-            include("webapp-runner*")
-        }
+        into("${rootProject.buildDir}/libs")
+        from("$buildDir/libs")
+    }
+
+    copyToLib {
+        dependsOn(shadowJar)
     }
 
     register("stage") {
-        dependsOn(war, copyToLib)
+        dependsOn(clean, shadowJar)
     }
 }
 
