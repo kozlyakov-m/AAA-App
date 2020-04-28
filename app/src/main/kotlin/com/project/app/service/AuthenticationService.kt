@@ -25,7 +25,7 @@ class AuthenticationService(val authenticationDAO: AuthenticationDAO) {
         }
     }
 
-    private fun isLoginValid(login: String): Boolean = "^[a-z]{1,10}$".toRegex().matches(login)
+    fun isLoginValid(login: String): Boolean = "^[a-z]{1,10}$".toRegex().matches(login)
 
     private fun checkPassword(pass: String, user: User) = pass.getHash(user.salt) == user.hash
 
