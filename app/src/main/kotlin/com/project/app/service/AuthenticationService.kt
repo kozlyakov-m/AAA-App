@@ -31,8 +31,8 @@ class AuthenticationService(val authenticationDAO: AuthenticationDAO) {
 
     // stackoverflow driven development
     private fun String.getHash(
-            salt: String,
-            algorithm: String = "SHA-256"
+        salt: String,
+        algorithm: String = "SHA-256"
     ): String {
         // val bytes = (salt + this).toByteArray()
         val bytes = (this + salt).toByteArray()
