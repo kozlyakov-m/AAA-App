@@ -9,7 +9,7 @@ before_script:
 
 script:
     - ./TEST.sh
-    - ./gradlew test && jacocoTestReport
+    - ./gradlew test && ./gradlew jacocoTestReport
 after_success:
     bash <(curl -s https://codecov.io/bash)
 
