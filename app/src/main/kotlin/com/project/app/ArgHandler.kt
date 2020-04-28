@@ -2,7 +2,6 @@ package com.project.app
 
 import kotlinx.cli.ArgParser
 import kotlinx.cli.ArgType
-import kotlinx.cli.default
 
 class ArgHandler(args: Array<String>) {
 
@@ -19,24 +18,30 @@ class ArgHandler(args: Array<String>) {
     val pass: String? by parser
             .option(ArgType.String, null, "pass", null, null)
 
-    val res: String by parser
+    val _res: String? by parser
             .option(ArgType.String, null, "res", null, null)
-            .default("")
-    val role: String by parser
+    val res: String
+        get() = _res!!
+
+    val _role: String? by parser
             .option(ArgType.String, null, "role", null, null)
-            .default("")
+    val role: String
+        get() = _role!!
 
-    val ds: String by parser
+    val _ds: String? by parser
             .option(ArgType.String, null, "ds", null, null)
-            .default("")
+    val ds: String
+        get() = _ds!!
 
-    val de: String by parser
+    val _de: String? by parser
             .option(ArgType.String, null, "de", null, null)
-            .default("")
+    val de: String
+        get() = _de!!
 
-    val vol: String by parser
-            .option(ArgType.String, null, "vol", null, null)
-            .default("") // will convert to int in BusinessLogic
+    val _vol: String? by parser
+            .option(ArgType.String, null, "vol", null, null) // will convert to int in BusinessLogic
+    val vol: String
+        get() = _vol!!
 
     init {
         try {
@@ -51,8 +56,8 @@ class ArgHandler(args: Array<String>) {
             !login.isNullOrEmpty() && !pass.isNullOrEmpty()
 
     fun isAuthorizationRequired(): Boolean =
-            res.isNotEmpty() && role.isNotEmpty()
+            !_res.isNullOrEmpty() && !_role.isNullOrEmpty()
 
     fun isAccountingRequired(): Boolean =
-            ds.isNotEmpty() && de.isNotEmpty() && vol.isNotEmpty()
+            !_ds.isNullOrEmpty() && !_de.isNullOrEmpty() && !_vol.isNullOrEmpty()
 }
