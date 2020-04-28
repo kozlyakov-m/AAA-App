@@ -9,6 +9,9 @@ before_script:
 
 script:
     - ./TEST.sh
+    - ./gradlew test && jacocoTestReport
+after_success:
+    bash <(curl -s https://codecov.io/bash)
 
 deploy:
     provider: heroku
