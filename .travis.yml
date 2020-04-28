@@ -1,7 +1,6 @@
 language: java
 
 install:
-    - sudo snap install --classic kotlin
     - chmod +x gradlew
     - chmod +x TEST.sh
 
@@ -10,3 +9,12 @@ before_script:
 
 script:
     - ./TEST.sh
+
+deploy:
+    provider: heroku
+    api_key:
+        secure: c4L+5rrLOwX2JV7UabRcxlxrT2+u4eQPWHhNe/xYR4tiNAHjhyiNft387ewjj9nRW9KyolEEcD+n9pTduMsAxRuQxwOXqU9kV7z8RMN4/3ZZUF0n4KDLGtqUT11Dk8hihQc0WDHjnUDMlVJS5tXlSx5Ss4GECdB9E5rfEMVtUVouupLBsYK8Kxl5pIEO7zllhPX6a/ca+/OQGm7ECxrhm4jsQ86Z0hYU6ZckTcKBsXo5GNVPe70rrbH0C+SeGPaWfaAhSbUDpcZ94ZrtNRkl8MLFtTxu3o3Zghvk/GvyqCr6cPSWGKMF4UniZg/YteXz8FYBTDbOcTgS+jWXQ5T//Qduzr7Xh/bXH1n2P2Pd6uKgzmbqzC+h2aZsc3DNYMbYG4JiGBSBA0g9ZKXumtbbAlSEFEVzD6LdjOTS+ffI0WaOl4ZDsz+bvb77PfP7XmjyXmmtROupAsUBFqMo19/762hgijJfF48vINGyR7uOx/HwtIeu6MOnHuFr372YSOdEOanD07vBg9ypO5i7NMWHbtevbTo+egkzP0HOrPLWryPrRQROAoP5lQF0KZaClFW+Cp6cknvXMJwWZ1rpvu3fGBLHs4y6fw97rigrUV2hMoox5OWImA57ZaDJs4kLPDy7OSrpjturskz9iLKYnboKG3iaqw40GVaHsEpRsFdp5Ns=
+    app: aaa-app
+    on:
+        repo: kozlyakov-m/AAA-App
+        all_branches: true
