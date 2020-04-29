@@ -1,11 +1,12 @@
 package com.project.app.service
 
+import com.google.inject.Inject
 import com.project.app.ExitCodes
 import com.project.app.dao.AuthenticationDAO
 import com.project.app.domain.User
 import java.security.MessageDigest
 
-class AuthenticationService(val authenticationDAO: AuthenticationDAO) {
+class AuthenticationService @Inject constructor(private val authenticationDAO: AuthenticationDAO) {
 
     var user: User? = null
 

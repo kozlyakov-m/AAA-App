@@ -1,9 +1,11 @@
 package com.project.app.dao
 
+import com.google.inject.Inject
 import com.project.app.domain.Permission
 import java.sql.Connection
 
-class AccountingDAO(val dbConnection: Connection) {
+
+class AccountingDAO @Inject constructor(private val dbConnection: Connection) {
 
     @Suppress("MagicNumber")
     fun writeSession(res: Permission, ds: String, de: String, vol: Int) {

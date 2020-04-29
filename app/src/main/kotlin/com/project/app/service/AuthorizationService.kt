@@ -1,11 +1,12 @@
 package com.project.app.service
 
+import com.google.inject.Inject
 import com.project.app.ExitCodes
 import com.project.app.Role
 import com.project.app.dao.AuthorizationDAO
 import com.project.app.domain.Permission
 
-class AuthorizationService(val authorizationDAO: AuthorizationDAO) {
+class AuthorizationService @Inject constructor(private val authorizationDAO: AuthorizationDAO) {
 
     var permission: Permission? = null
 

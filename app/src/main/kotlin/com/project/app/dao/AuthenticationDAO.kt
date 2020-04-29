@@ -1,9 +1,10 @@
 package com.project.app.dao
 
+import com.google.inject.Inject
 import com.project.app.domain.User
 import java.sql.Connection
 
-class AuthenticationDAO(val dbConnection: Connection) {
+class AuthenticationDAO @Inject constructor(private val dbConnection: Connection) {
     fun findUser(login: String): User? {
         val query = "SELECT * FROM users WHERE login = ?"
         val statement = dbConnection.prepareStatement(query)

@@ -1,11 +1,12 @@
 package com.project.app
 
+import com.google.inject.Inject
 import com.project.app.domain.Permission
 import com.project.app.service.AccountingService
 import com.project.app.service.AuthenticationService
 import com.project.app.service.AuthorizationService
 
-class Application(
+class Application @Inject constructor(
     private val argHandler: ArgHandler,
     private val authenticationService: AuthenticationService,
     private val authorizationService: AuthorizationService,

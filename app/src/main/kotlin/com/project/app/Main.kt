@@ -1,16 +1,11 @@
 package com.project.app
 
-import com.project.app.dao.AccountingDAO
-import com.project.app.dao.AuthenticationDAO
-import com.project.app.dao.AuthorizationDAO
+import com.google.inject.Guice
 import com.project.app.service.AccountingService
 import com.project.app.service.AuthenticationService
 import com.project.app.service.AuthorizationService
-import com.project.app.ExitCodes
-import java.sql.Connection
-import java.sql.DriverManager
-import kotlin.system.exitProcess
 import org.flywaydb.core.Flyway
+import kotlin.system.exitProcess
 
 
 fun main(args: Array<String>) {
@@ -21,25 +16,17 @@ fun main(args: Array<String>) {
             .load()
     flyway.migrate()
 
-    val dbConnection: Connection = DriverManager
-            .getConnection("jdbc:h2:./AAA-App", "sa", "")
+    val injector = Guice.createInjector(GuiceConnectionModule())
 
-    var exitCode = ExitCodes.SUCCESS
-    dbConnection.use {
-        val argHandler = ArgHandler(args)
+    val argHandler = ArgHandler(args)
 
-        val authenticationDAO = AuthenticationDAO(dbConnection)
-        val authenticationService = AuthenticationService(authenticationDAO)
+    val authenticationService = injector.getInstance(AuthenticationService::class.java)
 
-        val authorizationDAO = AuthorizationDAO(dbConnection)
-        val authorizationService = AuthorizationService(authorizationDAO)
+    val authorizationService = injector.getInstance(AuthorizationService::class.java)
+    val accountingService = injector.getInstance(AccountingService::class.java)
 
-        val accountingDAO = AccountingDAO(dbConnection)
-        val accountingService = AccountingService(accountingDAO)
+    //val app = injector.getInstance(Application::class.java)
+    val app = Application(argHandler, authenticationService, authorizationService, accountingService)
 
-        val app = Application(argHandler, authenticationService, authorizationService, accountingService)
-        exitCode = app.start()
-    }
-
-    exitProcess(exitCode.code)
+    exitProcess(app.start().code)
 }

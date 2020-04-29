@@ -1,9 +1,10 @@
 package com.project.app.dao
 
+import com.google.inject.Inject
 import com.project.app.domain.Permission
 import java.sql.Connection
 
-class AuthorizationDAO(val dbConnection: Connection) {
+class AuthorizationDAO @Inject constructor(private val dbConnection: Connection) {
 
     @Suppress("MagicNumber")
     fun getResource(resPath:String, role: String, login: String): Permission? {

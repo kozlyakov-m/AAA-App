@@ -1,5 +1,6 @@
 package com.project.app.service
 
+import com.google.inject.Inject
 import com.project.app.ExitCodes
 import com.project.app.dao.AccountingDAO
 import com.project.app.domain.Permission
@@ -8,16 +9,16 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 
-class AccountingService(val accountingDAO: AccountingDAO) {
+class AccountingService @Inject constructor(private val accountingDAO: AccountingDAO) {
 
     var session: Session? = null
 
     @Suppress("ReturnCount")
     fun accounting(
-        res: Permission,
-        ds: String,
-        de: String,
-        vol: String
+            res: Permission,
+            ds: String,
+            de: String,
+            vol: String
     ): ExitCodes {
 
         val volInt = vol.toInteger() ?: return ExitCodes.INVALID_ACTIVITY
